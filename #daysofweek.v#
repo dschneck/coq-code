@@ -1,0 +1,56 @@
+
+Inductive day : Type :=
+  | monday : day
+  | tuesday : day
+  | wednesday : day
+  | thursday : day
+  | friday : day
+  | saturday : day
+  | sunday : day.
+
+Definition next_weekday (d:day) : day :=
+  match d with
+  | monday => tuesday
+  | tuesday => wednesday
+  | wednesday => thursday
+  | thursday => friday
+  | friday => monday
+  | saturday => monday
+  | sunday => monday
+  end.
+
+Compute (next_weekday friday).
+
+Example test_next_weekday:
+  (next_weekday (next_weekday saturday)) = tuesday.
+
+(* "The assertion we've just made can be proved by observing that 
+both sides of the equality evaluate to the same thing, after some simplification."*) 
+Proof. simpl. reflexivity. Qed.
+
+Inductive bool : Type :=
+  | true: bool
+  | false: bool.
+
+(* define a predicate, a function that identifies some subset of a given set *)
+
+Definition is_weekday (d:day) : bool :=
+  match d with
+    | monday => true
+    | tuesday => true
+    | wednesday => true
+    | thursday => true
+    | friday => true
+    | saturday => false
+    | sunday => false
+    end.
+
+(* We can also define some of the usual operations on booleans.
+ First comes not or negation, which is often written as the operator ! *)
+
+Definition negb (b:bool) bool :=
+  match b with 
+    | true => false
+    | false => true
+  end.
+
