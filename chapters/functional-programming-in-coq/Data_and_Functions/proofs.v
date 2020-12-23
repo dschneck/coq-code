@@ -23,7 +23,7 @@ Theorem plus_id_example : forall (n m: nat),
 the arrow... but you may assume what's to the left. *)
 
 Proof. 
-  (* move both quantifiers int othe context *)
+  (* move both quantifiers into the context *)
   intros n m .
   (* move the hypothesis into the context *)
   intros H.
