@@ -85,6 +85,7 @@ Proof. intros n m. induction n as [|n' IHn'].
   - simpl. reflexivity.
   - simpl. rewrite <- IHn'. reflexivity. Qed.
 
+(* My weird attempts
 Theorem plus_comm : forall n m : nat,
   n + m = m + n.
 Proof. intros n m. induction n as [|n' IHn'].
@@ -93,10 +94,31 @@ Proof. intros n m. induction n as [|n' IHn'].
     + simpl. rewrite <- IHm'. reflexivity.
   - simpl. induction m as [|m' IHm'].
     + rewrite -> IHn'. simpl. reflexivity.
+    + rewrite -> IHn'. simpl. rewrite <- IHm'.
+      * simpl. rewrite <- IHn'.
+
+rewrite <- IHm'.
+     -- rewrite -> IHn'. simpl. reflexivity. rewrite <- IHn'.
+
     + simpl. rewrite -> IHn'. rewrite <- IHm'. simpl. rewrite <- IHn'.
     
+*)
 
+Theorem plus_comm : forall n m : nat,
+  n + m = m + n.
 
+Proof. intros n m. induction n as [|n' IHn'].
+  - simpl. rewrite <- plus_N_O. reflexivity.
+  - simpl. rewrite -> IHn'. rewrite -> plus_n_Sm. reflexivity.
+Qed. 
+
+Theorem plus_assoc : forall n m p : nat,
+  n + (m + p) = (n + m) + p.
+
+Proof. intros n m p. induction n.
+  - simpl. reflexivity.
+  - simpl. rewrite -> IHn. reflexivity. 
+Qed.
 
 (* Proofs within proofs *)
 
